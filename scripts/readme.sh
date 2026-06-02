@@ -30,15 +30,3 @@ EOF
   done
 done
 
-git add output
-
-if git diff --cached --quiet; then
-  echo "ℹ️ No README changes"
-  exit 0
-fi
-
-git commit -m "📝 Update package README(s)"
-
-git pull --rebase origin main
-
-git push origin main
