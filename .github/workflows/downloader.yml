@@ -66,11 +66,11 @@ jobs:
           ZIP_MODE: ${{ github.event.inputs.zip_mode }}
           ZIP_PASSWORD: ${{ github.event.inputs.zip_password }}
 
+      - name: 📁 Generate README
+        run: ./scripts/readme.sh
+
       - name: 🚀 Push to main
         run: ./scripts/push.sh
-
-      - name: 📁 Redme Generate
-        run: ./scripts/readme.sh
 
 
 
