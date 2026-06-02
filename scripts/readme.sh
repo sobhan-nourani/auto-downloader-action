@@ -38,4 +38,7 @@ if git diff --cached --quiet; then
 fi
 
 git commit -m "📝 Update package README(s)"
+
+git pull --rebase origin main
+
 git push origin main
