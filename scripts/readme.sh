@@ -37,9 +37,10 @@ if git diff --cached --quiet; then
 fi
 
 git commit -m "📝 Update package README(s)"
-git push --force origin main
+git push origin main
 
   echo "" >> README.md
+done
 
 git add README.md
 
@@ -49,6 +50,6 @@ if git diff --cached --quiet; then
 fi
 
 git commit -m "📝 Update README"
-git push --force origin main
+git push origin main
 
 done
