@@ -40,7 +40,6 @@ git commit -m "📝 Update package README(s)"
 git push origin main
 
   echo "" >> README.md
-done
 
 git add README.md
 
@@ -51,3 +50,5 @@ fi
 
 git commit -m "📝 Update README"
 git push origin main
+
+done
