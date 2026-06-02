@@ -68,6 +68,3 @@ jobs:
 
       - name: 🚀 Push to main
         run: ./scripts/push.sh
-
-      - name: 📝 README
-        run: ./scripts/readme.sh
