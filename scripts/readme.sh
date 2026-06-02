@@ -15,8 +15,8 @@ for DIR in output/*; do
   cat > "$README" <<EOF
 # 📦 Download Package
 
-✅ Auto Generated  
-🆔 ID: $ID  
+✅ Auto Generated
+🆔 ID: $ID
 🕒 $(date)
 
 ## 🔗 Files
@@ -25,6 +25,7 @@ EOF
   for f in "$DIR"/*; do
     FILE=$(basename "$f")
     [ "$FILE" = "README.md" ] && continue
+
     echo "- [$FILE]($REPO_URL/raw/main/output/$ID/$FILE)" >> "$README"
   done
 done
@@ -38,18 +39,3 @@ fi
 
 git commit -m "📝 Update package README(s)"
 git push origin main
-
-  echo "" >> README.md
-done
-
-git add README.md
-
-if git diff --cached --quiet; then
-  echo "ℹ️ README unchanged"
-  exit 0
-fi
-
-git commit -m "📝 Update README"
-git push origin main
-
-done
