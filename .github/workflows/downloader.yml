@@ -1,0 +1,73 @@
+permissions:
+  contents: write
+
+name: 🔥 Auto Downloader (Main Branch)
+
+on:
+  workflow_dispatch:
+    inputs:
+      activation_code:
+        description: '🔑 Activation code'
+        required: false
+      urls:
+        description: '🔗 Download link'
+        required: true
+      zip_mode:
+        description: '📦 Zip output'
+        required: false
+        default: zip
+        type: choice
+        options:
+          - zip
+          - normal
+      zip_password:
+        description: '🔒 Zip password'
+        required: false
+
+env:
+  VALID_CODE: "1234"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - run: sudo apt update && sudo apt install -y aria2 zip
+
+      - run: chmod +x scripts/*.sh
+
+      - uses: actions/cache@v4
+        with:
+          path: .activated
+          key: activation-cache-v1
+
+      - name: 🔑 Activate
+        run: ./scripts/activate.sh
+        env:
+          ACTIVATION_CODE: ${{ github.event.inputs.activation_code }}
+
+      - uses: actions/cache@v4
+        with:
+          path: .activated
+          key: activation-cache-v1
+
+      - name: ⬇️ Download
+        run: ./scripts/download.sh
+        env:
+          URLS: ${{ github.event.inputs.urls }}
+
+      - name: 🗜️ ZIP + Split (WinRAR)
+        run: ./scripts/zip.sh
+        env:
+          ZIP_MODE: ${{ github.event.inputs.zip_mode }}
+          ZIP_PASSWORD: ${{ github.event.inputs.zip_password }}
+
+      - name: 🚀 Push to main
+        run: ./scripts/push.sh
+
+      - name: 📝 README
+        run: ./scripts/readme.sh
