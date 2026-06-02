@@ -70,7 +70,7 @@ jobs:
         run: ./scripts/push.sh
 
       - name: 📁 Redme Generate
-        run: ./scripts/redme.sh
+        run: ./scripts/readme.sh
 
 
 
